@@ -1,0 +1,163 @@
+/* Base */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+/* Layout: una sola columna estrecha tipo "carta abierta en el móvil", secciones que se van descubriendo hacia abajo. Look único rosa (deliberadamente un solo tema). */
+:root{
+  --blush:#f8e4e8;      /* fondo */
+  --petal:#fdf3f5;      /* tarjetas */
+  --rose:#e9b8c3;       /* bordes suaves */
+  --wine:#8e1b3a;       /* acento */
+  --ink:#3d1f27;        /* texto */
+  --mute:#8a6670;       /* texto secundario */
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.heart-btn{-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.heart-btn:focus{outline:none}
+body{background:var(--blush);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:300;text-wrap:balance;margin:0;color:var(--ink)}
+h2{font-size:1.75rem;line-height:1.2}
+.eyebrow{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);font-weight:500;margin:0 0 8px}
+section{display:flex;flex-direction:column;gap:18px}
+.center{text-align:center;align-items:center}
+.card{background:var(--petal);border:1px solid var(--rose);border-radius:18px;padding:22px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+
+/* Portada */
+.cover{min-height:min(88vh,720px);justify-content:center;padding-top:40px}
+.cover h1{font-size:2.6rem;line-height:1.05;font-style:italic}
+.cover .from{color:var(--mute);margin:0}
+.cover .from b{color:var(--wine);font-weight:600}
+.heart-btn{background:none;border:0;padding:12px;margin-top:8px}
+.heart-btn svg{width:96px;height:96px;display:block;animation:beat 1.6s ease-in-out infinite}
+.heart-btn .fill{transform-origin:50% 100%;transform:scaleY(0);transition:transform .35s ease}
+.opened .heart-btn .fill{transform:scaleY(1)}
+.opened .heart-btn svg{animation:none}
+.hint{font-size:.8rem;color:var(--mute);margin:0}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.08)}30%{transform:scale(.98)}45%{transform:scale(1.05)}}
+
+/* Canción */
+.song{display:flex;gap:16px;align-items:center;text-decoration:none;color:inherit;width:100%;text-align:left;font:inherit}
+.disc{flex:none;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,var(--blush) 0 9px,var(--wine) 10px 12px,#2b1218 13px);animation:spin 6s linear infinite paused}
+.song.playing .disc{animation-play-state:running}
+.song div{min-width:0}
+.song strong{display:block;font-family:var(--display);font-weight:500;font-size:1.15rem}
+.song span{color:var(--mute);font-size:.9rem}
+.song em{display:block;font-style:normal;color:var(--wine);font-size:.8rem;font-weight:600;margin-top:4px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Galería */
+/* Galería: polaroids pegadas con cinta, inclinadas, que se enderezan al tocarlas */
+.gallery{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px 10% 30px;margin-inline:-16px;scrollbar-width:none}
+.gallery::-webkit-scrollbar{display:none}
+.photo{flex:0 0 78%;scroll-snap-align:center;margin:0;background:#fff;padding:12px 12px 0;border-radius:3px;box-shadow:0 14px 30px -10px rgba(90,20,40,.45),0 2px 6px rgba(90,20,40,.12);position:relative;transform:rotate(var(--r,-3deg));transition:transform .35s ease;cursor:zoom-in;border:0;font:inherit;color:inherit;text-align:center}
+.photo:nth-child(even){--r:3deg}
+.photo:nth-child(3n){--r:-1.5deg}
+.photo:hover,.photo:focus-visible{transform:rotate(0) scale(1.03)}
+.photo::before{content:"";position:absolute;top:-14px;left:50%;width:92px;height:28px;transform:translateX(-50%) rotate(-4deg);background:rgba(233,184,195,.75);border-left:2px dashed rgba(255,255,255,.6);border-right:2px dashed rgba(255,255,255,.6)}
+.photo .img{aspect-ratio:4/5;max-width:100%;background:linear-gradient(160deg,#f3c9d3,#d98ea2);display:grid;place-items:center;color:#fff;font-family:var(--display);font-style:italic;font-size:1.1rem;overflow:hidden;filter:saturate(1.08) contrast(1.03)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.photo figcaption{font-family:"Caveat","Segoe Script",cursive;font-size:1.6rem;line-height:1.1;color:var(--ink);padding:12px 4px 16px}
+.photo figcaption::after{content:" ♥";color:var(--wine);font-size:1.2rem}
+.lightbox{position:fixed;inset:0;z-index:20;background:rgba(40,10,20,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:calc(20px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:fade .3s ease}
+.lightbox img{max-height:72vh;max-width:100%;border:10px solid #fff;border-bottom-width:10px;border-radius:3px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.lightbox p{font-family:"Caveat","Segoe Script",cursive;font-size:2rem;color:#fff;margin:0;text-align:center}
+.lb-nav{display:flex;gap:14px}
+.lb-nav button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:10px 18px;font-weight:600}
+@keyframes fade{from{opacity:0}}
+.swipe{font-size:.8rem;color:var(--mute);text-align:center;margin:0}
+
+/* Carta */
+.letter p{margin:0 0 14px;font-family:var(--display);font-size:1.08rem;line-height:1.7;font-weight:300}
+.letter .sign{font-style:italic;color:var(--wine);text-align:right;margin:0}
+
+/* Línea del tiempo */
+.counter{text-align:center}
+.counter .num{font-family:var(--display);font-size:3.4rem;line-height:1;color:var(--wine);font-variant-numeric:tabular-nums;font-weight:300}
+.counter .lbl{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.counter .since{font-size:.85rem;color:var(--mute);margin-top:4px}
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--rose);display:flex;flex-direction:column;gap:22px}
+.tl li{position:relative}
+.tl li::before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--wine);box-shadow:0 0 0 4px var(--blush)}
+.tl time{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mute)}
+.tl h3{font-size:1.2rem;font-weight:500;margin:2px 0 4px}
+.tl p{margin:0;font-size:.95rem}
+
+/* Sorpresa */
+.cta{background:var(--wine);color:#fff;border:0;border-radius:999px;padding:14px 28px;font-weight:600;letter-spacing:.02em}
+.cta:hover{filter:brightness(1.1)}
+.quiz{display:flex;flex-direction:column;gap:14px}
+.progress{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.q{font-family:var(--display);font-size:1.4rem;line-height:1.25;margin:0}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;background:#fff;border:1px solid var(--rose);border-radius:14px;padding:13px 16px;color:var(--ink)}
+.opt:hover{border-color:var(--wine)}
+.opt.ok{background:var(--wine);color:#fff;border-color:var(--wine)}
+.opt.no{animation:shake .4s}
+.msg{min-height:1.4em;margin:0;font-size:.9rem;color:var(--wine);text-align:center}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ticket{background:var(--petal);border:2px dashed var(--wine);border-radius:18px;padding:28px 22px;text-align:center;position:relative}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:var(--blush);transform:translateY(-50%)}
+.ticket::before{left:-12px}.ticket::after{right:-12px}
+.ticket .what{font-family:var(--display);font-size:1.5rem;line-height:1.25;margin:6px 0 10px}
+.ticket .by{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.reset{background:none;border:0;color:var(--mute);text-decoration:underline;font-size:.85rem}
+footer{text-align:center;font-family:var(--display);font-style:italic;color:var(--mute)}
+
+/* Lluvia de corazones */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.fx span{position:absolute;top:-40px;animation:fall linear forwards;line-height:1}
+@keyframes fall{to{transform:translateY(115vh) rotate(var(--rot,180deg))}}
+
+/* Chat */
+.chat{background:#f1dde2;border-radius:18px;padding:16px 12px;display:flex;flex-direction:column;gap:6px}
+.chip{align-self:center;font-size:.7rem;letter-spacing:.06em;background:var(--petal);color:var(--mute);padding:4px 12px;border-radius:999px;margin:10px 0 4px}
+.b{max-width:82%;padding:8px 12px 6px;border-radius:16px;font-size:.95rem;line-height:1.4;box-shadow:0 1px 2px rgba(90,20,40,.12);min-width:0;overflow-wrap:anywhere}
+.b.ella{align-self:flex-start;background:#fff;color:var(--ink);border-bottom-left-radius:4px}
+.b.yo{align-self:flex-end;background:var(--wine);color:#fff;border-bottom-right-radius:4px}
+.b small{display:block;font-size:.66rem;opacity:.7;text-align:right;margin-top:2px}
+.b.big{font-family:var(--display);font-style:italic;font-size:1.05rem}
+
+/* Contador en vivo */
+.live{display:flex;justify-content:center;gap:22px;margin-top:16px}
+.live div{display:flex;flex-direction:column;align-items:center}
+.live b{font-family:var(--display);font-size:1.7rem;font-weight:400;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.live span{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mute)}
+
+/* Raspa y descubre */
+.scratch-wrap{position:relative;width:100%}
+.scratch-wrap canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:18px;touch-action:none;cursor:grab;transition:opacity .6s ease}
+.scratch-wrap canvas.done{opacity:0;pointer-events:none}
+
+/* Pregunta final */
+.final{width:100%;display:flex;flex-direction:column;gap:10px;align-items:center}
+.final h2{font-size:2rem;font-style:italic}
+.yn{position:relative;width:100%;height:170px}
+.yn .cta{position:absolute;left:14%;top:60px}
+.yes-card{width:100%;background:var(--petal);border:1px solid var(--rose);border-radius:22px;padding:30px 22px;text-align:center;box-shadow:0 18px 40px -18px rgba(142,27,58,.45);animation:rise 1s ease both}
+.yes-card .big-heart{font-size:3.4rem;line-height:1;color:var(--wine);animation:beat 1.6s ease-in-out infinite}
+.yes-card h3{font-size:1.7rem;font-style:italic;font-weight:300;margin:10px 0 14px}
+.yes-card p{font-family:var(--display);font-weight:300;font-size:1.08rem;line-height:1.65;margin:0 0 12px}
+.yes-card .yes-big{font-family:"Caveat","Segoe Script",cursive;font-size:1.9rem;line-height:1.2;color:var(--wine);margin:18px 0}
+.yes-card .yes-sign{font-style:italic;color:var(--wine);margin:0}
+.no-btn{position:absolute;left:60%;top:60px;background:#fff;border:1px solid var(--rose);border-radius:999px;padding:13px 26px;color:var(--ink);font-weight:600;transition:left .18s ease,top .18s ease;white-space:nowrap}
+
+.reveal{animation:rise .9s ease both}
+.locked .reveal,.locked footer{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.heart-btn.pop svg{animation:pop .25s ease}
+@keyframes pop{50%{transform:scale(1.18)}}
+.taps{display:flex;gap:6px;justify-content:center}
+.taps i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--wine);transition:background .2s}
+.taps i.on{background:var(--wine)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

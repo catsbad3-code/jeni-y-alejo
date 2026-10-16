@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8e4e8">
+<title>Tienes un regalo ♥</title>
+<meta name="description" content="Un regalo especial para ti ♥">
+<meta property="og:title" content="Tienes un regalo ♥">
+<meta property="og:description" content="Toca el corazón para abrirlo">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:wght@400;500;600&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap" id="app">
+  <section class="cover center" id="cover">
+    <p class="eyebrow">Tienes un regalo</p>
+    <h1 id="paraName"></h1>
+    <p class="from">de <b id="deName"></b> ♥</p>
+    <button class="heart-btn" id="heartBtn" aria-label="Abrir el regalo">
+      <svg viewBox="0 0 100 92" aria-hidden="true">
+        <defs><clipPath id="hc"><path d="M50 88S6 60 6 30C6 15 17 5 30 5c9 0 16 5 20 12C54 10 61 5 70 5c13 0 24 10 24 25 0 30-44 58-44 58z"/></clipPath></defs>
+        <g clip-path="url(#hc)"><rect class="fill" x="0" y="0" width="100" height="92" fill="#8e1b3a"/></g>
+        <path d="M50 88S6 60 6 30C6 15 17 5 30 5c9 0 16 5 20 12C54 10 61 5 70 5c13 0 24 10 24 25 0 30-44 58-44 58z" fill="none" stroke="#8e1b3a" stroke-width="3"/>
+      </svg>
+    </button>
+    <div class="taps" id="taps" aria-hidden="true"></div>
+    <p class="hint" id="hint">Toca el corazón varias veces para llenarlo</p>
+  </section>
+
+  <section class="reveal center" id="song">
+    <div><p class="eyebrow">Nuestra canción</p></div>
+    <button class="card song" id="songBtn" type="button">
+      <span class="disc" aria-hidden="true"></span>
+      <div><strong id="songTitle"></strong><span id="songArtist"></span><em id="songState">▶ Toca para escucharla</em></div>
+    </button>
+    <audio id="audio" src="music/lo-sabes-bien.mp3" preload="auto" loop></audio>
+  </section>
+
+  <section class="reveal">
+    <div class="center" style="display:flex;flex-direction:column"><p class="eyebrow">Galería</p><h2>Momentos que no se borran</h2></div>
+    <div class="gallery" id="gallery"></div>
+    <p class="swipe">Desliza para ver más y toca una foto para verla en grande</p>
+    <div class="lightbox" id="lightbox" hidden>
+      <img id="lbImg" alt="">
+      <p id="lbText"></p>
+      <div class="lb-nav"><button type="button" id="lbPrev">←</button><button type="button" id="lbClose">Cerrar</button><button type="button" id="lbNext">→</button></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="center" style="display:flex;flex-direction:column"><p class="eyebrow">Carta</p></div>
+    <div class="card letter" id="letter"></div>
+  </section>
+
+  <section class="reveal">
+    <div class="center" style="display:flex;flex-direction:column"><p class="eyebrow">Mi Amor ❤️</p><h2>Cosas que nos dijimos</h2></div>
+    <div class="chat" id="chat"></div>
+  </section>
+
+  <section class="reveal">
+    <div class="center" style="display:flex;flex-direction:column"><p class="eyebrow">Recuerdos</p><h2>Nuestra línea del tiempo</h2></div>
+    <div class="card counter">
+      <div class="num" id="days">0</div>
+      <div class="lbl">días juntos</div>
+      <div class="since" id="since"></div>
+      <div class="live" aria-live="off">
+        <div><b id="lh">00</b><span>horas</span></div>
+        <div><b id="lm">00</b><span>minutos</span></div>
+        <div><b id="ls">00</b><span>segundos</span></div>
+      </div>
+    </div>
+    <ol class="tl" id="timeline"></ol>
+  </section>
+
+  <section class="reveal center" id="surprise">
+    <p class="eyebrow">Una última sorpresa</p>
+    <h2>Todavía no termina</h2>
+    <p style="margin:0;color:var(--mute)">Responde unas preguntas sobre nosotros para descubrirla.</p>
+    <button class="cta" id="startQuiz">Descubrir la sorpresa</button>
+    <div class="card quiz" id="quiz" hidden style="width:100%;text-align:left"></div>
+    <div class="scratch-wrap" id="scratchWrap" hidden>
+      <div class="ticket" id="ticket">
+        <p class="eyebrow">Vale especial</p>
+        <p class="what" id="valeText"></p>
+        <p class="by" id="valeBy"></p>
+      </div>
+      <canvas id="scratch" aria-label="Raspa para descubrir tu regalo"></canvas>
+    </div>
+    <p class="hint" id="scratchHint" hidden>Raspa con el dedo para descubrir tu regalo</p>
+    <button class="cta" id="oneMore" hidden>Una cosa más…</button>
+    <div class="final" id="final" hidden>
+      <p class="eyebrow">Para terminar</p>
+      <h2>¿Quieres librarte de mí?</h2>
+      <div class="yn" id="yn"><button class="cta" id="yes">Sí ♥</button><button class="no-btn" id="no">No</button></div>
+      <p class="msg" id="finalMsg"></p>
+      <div class="yes-card" id="yesCard" hidden>
+        <div class="big-heart" aria-hidden="true">♥</div>
+        <h3>¡Caíste! 😆</h3>
+        <p>Ese botón de “No” nunca iba a funcionar… porque aunque quisieras, de mí no te libras. Ahora sí, en serio:</p>
+        <p>Gracias por elegirme otra vez, mi amor.</p>
+        <p>Este año contigo ha sido lo mejor que me ha pasado. Me enseñaste que el amor no siempre es fácil, pero que vale la pena cuando es con la persona correcta. Y esa persona eres tú.</p>
+        <p>Te prometo seguir cuidándote, hacerte reír y elegirte todos los días, igual que tú me lo prometiste a mí.</p>
+        <p class="yes-big">Feliz primer aniversario, mi amor.<br>Por este año y por todos los que vienen.</p>
+        <p class="yes-sign">Te amo ❤️<br>— Alejo</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
