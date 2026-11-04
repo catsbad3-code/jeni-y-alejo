@@ -33,10 +33,19 @@
 
   <section class="reveal center" id="song">
     <div><p class="eyebrow">Nuestra canción</p></div>
-    <button class="card song" id="songBtn" type="button">
-      <span class="disc" aria-hidden="true"></span>
-      <div><strong id="songTitle"></strong><span id="songArtist"></span><em id="songState">▶ Toca para escucharla</em></div>
-    </button>
+    <div class="card player" id="player">
+      <div class="vinyl" aria-hidden="true"><div class="label" style="background-image:url(img/nosotros.jpg)"></div></div>
+      <div class="meta"><strong id="songTitle"></strong><span id="songArtist"></span></div>
+      <div class="prog">
+        <div class="bar" id="progBar"><span id="progFill"></span></div>
+        <div class="times"><small id="tCur">0:00</small><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><small id="tDur">0:00</small></div>
+      </div>
+      <button class="play" id="songBtn" type="button" aria-label="Reproducir o pausar">
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
+      </button>
+      <em id="songState">Toca para escucharla</em>
+    </div>
     <audio id="audio" src="music/nuestra-cancion.mp3" preload="auto" loop></audio>
   </section>
 
@@ -58,7 +67,10 @@
 
   <section class="reveal">
     <div class="center" style="display:flex;flex-direction:column"><p class="eyebrow">♾️ Nosotros 🤍</p><h2>Cosas que nos dijimos</h2></div>
-    <div class="chat" id="chat"></div>
+    <div class="phone">
+      <div class="wa-head"><img src="img/nosotros.jpg" alt=""><div><b id="chatName"></b><small>en línea</small></div></div>
+      <div class="chat" id="chat"></div>
+    </div>
   </section>
 
   <section class="reveal">
@@ -127,6 +139,12 @@
 
   <footer id="foot"></footer>
 </div>
+<div class="ambient" id="ambient" aria-hidden="true"></div>
+<button class="mini" id="mini" type="button" hidden aria-label="Pausar o reproducir la canción">
+  <span class="mini-disc" style="background-image:url(img/nosotros.jpg)"></span>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="miniTxt"></span>
+</button>
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
