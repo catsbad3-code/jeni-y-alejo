@@ -5,11 +5,29 @@ $("paraName").textContent = REGALO.para;
 $("deName").textContent = REGALO.de;
 $("songTitle").textContent = REGALO.cancion.titulo;
 $("songArtist").textContent = REGALO.cancion.artista;
-const audio = $("audio"), songBtn = $("songBtn");
+const audio = $("audio"), songBtn = $("songBtn"), player = $("player"), mini = $("mini");
+$("miniTxt").textContent = REGALO.cancion.titulo;
+const mmss = t => isFinite(t) ? Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0") : "0:00";
 function playSong(){ const p = audio.play(); if (p && p.catch) p.catch(() => {}); }
-audio.addEventListener("play", () => { songBtn.classList.add("playing"); $("songState").textContent = "❚❚ Sonando… toca para pausar"; });
-audio.addEventListener("pause", () => { songBtn.classList.remove("playing"); $("songState").textContent = "▶ Toca para escucharla"; });
+function setPlaying(on){
+  player.classList.toggle("playing", on); mini.classList.toggle("playing", on); document.body.classList.toggle("music-on", on);
+  $("songState").textContent = on ? "Sonando para ti 🤍" : "Toca para escucharla";
+}
+audio.addEventListener("play", () => setPlaying(true));
+audio.addEventListener("pause", () => setPlaying(false));
+const showDur = () => { if (audio.duration) $("tDur").textContent = mmss(audio.duration); };
+audio.addEventListener("loadedmetadata", showDur); audio.addEventListener("durationchange", showDur); showDur();
+audio.addEventListener("timeupdate", () => {
+  $("tCur").textContent = mmss(audio.currentTime); showDur();
+  if (audio.duration) $("progFill").style.width = (audio.currentTime / audio.duration * 100) + "%";
+});
 songBtn.addEventListener("click", () => { audio.paused ? playSong() : audio.pause(); });
+mini.addEventListener("click", () => { audio.paused ? playSong() : audio.pause(); });
+$("progBar").addEventListener("click", e => {
+  if (!audio.duration) return;
+  const r = e.currentTarget.getBoundingClientRect();
+  audio.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * audio.duration;
+});
 
 $("gallery").innerHTML = REGALO.fotos.map((f, i) => `
   <figure class="photo" tabindex="0" data-i="${i}"><div class="img">${f.src ? `<img src="${esc(f.src)}" alt="${esc(f.texto)}">` : "Tu foto aquí"}</div>
@@ -29,7 +47,8 @@ if (fotosCon.length < 2) { $("lbPrev").hidden = true; $("lbNext").hidden = true;
 
 $("letter").innerHTML = REGALO.carta.map(p => `<p>${esc(p)}</p>`).join("") + `<p class="sign">${esc(REGALO.firma)}, ${esc(REGALO.de)}</p>`;
 
-$("stats").innerHTML = (REGALO.numeros || []).map(x => `<div class="stat"><b>${esc(x.n)}</b><span>${esc(x.t)}</span></div>`).join("");
+$("chatName").textContent = "♾️" + REGALO.para + "🤍";
+$("stats").innerHTML = (REGALO.numeros || []).map(x => `<div class="stat"><b data-n="${esc(x.n)}">${esc(x.n)}</b><span>${esc(x.t)}</span></div>`).join("");
 if (!(REGALO.numeros || []).length) $("stats").hidden = true;
 
 $("timeline").innerHTML = REGALO.momentos.map(m => `
@@ -62,8 +81,44 @@ $("heartBtn").addEventListener("click", () => {
   playSong();
   vib([80, 60, 80, 60, 200]);
   burst(40);
-  setTimeout(() => { $("cover").hidden = true; app.classList.remove("locked"); app.style.paddingTop = "40px"; window.scrollTo(0, 0); countUp(); }, 1100);
+  setTimeout(() => { $("cover").hidden = true; app.classList.remove("locked"); app.style.paddingTop = "40px"; window.scrollTo(0, 0); mini.hidden = false; startReveal(); }, 1100);
 });
+/* Puntos con separador de miles: 93352 → 93.352 */
+const miles = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+function countTo(el, target, dur){
+  const t0 = performance.now();
+  const step = now => { const k = Math.min(1, (now - t0) / dur); el.textContent = miles(Math.round(target * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+/* Las secciones aparecen al bajar; los números cuentan al verse */
+function startReveal(){
+  const els = document.querySelectorAll(".reveal");
+  const onShow = el => {
+    el.classList.add("in");
+    if (el.querySelector("#stats")) {
+      el.querySelectorAll(".stat b").forEach(b => countTo(b, +b.dataset.n.replace(/\D/g, ""), 1800));
+      countUp();
+    }
+  };
+  if (!("IntersectionObserver" in window)) { els.forEach(onShow); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { onShow(e.target); io.unobserve(e.target); } }), { threshold: .12 });
+  els.forEach(el => io.observe(el));
+  /* El mini reproductor se esconde mientras se ve el reproductor grande */
+  new IntersectionObserver(es => es.forEach(e => mini.classList.toggle("away", e.isIntersecting)), { threshold: .3 }).observe(player);
+}
+/* Corazones flotando de fondo */
+if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+  const amb = $("ambient");
+  for (let i = 0; i < 14; i++) {
+    const h = document.createElement("span");
+    h.textContent = i % 5 === 0 ? "∞" : "♥";
+    h.style.left = (Math.random() * 100) + "%";
+    h.style.fontSize = (10 + Math.random() * 18) + "px";
+    h.style.animationDuration = (14 + Math.random() * 16) + "s";
+    h.style.animationDelay = (-Math.random() * 30) + "s";
+    amb.appendChild(h);
+  }
+}
 function countUp(){
   const el = $("days"), t0 = performance.now(), dur = 1600;
   const step = now => { const k = Math.min(1, (now - t0) / dur); el.textContent = Math.round(totalDays * (1 - Math.pow(1 - k, 3))).toLocaleString("es"); if (k < 1) requestAnimationFrame(step); };
