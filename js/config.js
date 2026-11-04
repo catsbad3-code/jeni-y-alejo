@@ -73,15 +73,16 @@ const REGALO = {
   ],
   vale: "Vale por ir a buscarte al aeropuerto… y un abrazo que no se acabe nunca",
   final: {
-    pregunta: "¿Vamos a seguir juntos?",
-    noTextos: ["¿Segura? 😏", "Ese no funciona", "Te obligo 🤷", "Jajaja no", "No hay escapatoria", "Ya ríndete"],
-    titulo: "¡Sabía que dirías que sí! 🥰",
+    pregunta: "¿Eres celosa? 😏",
+    noTextos: ["¿Segura? 😏", "Ajá… 🙄", "Ese no funciona", "Mentirosa 😆", "No hay escapatoria", "Admítelo ya"],
+    titulo: "¡Caíste! Lo admitiste 😆",
     parrafos: [
-      "Ese botón de “No” nunca iba a funcionar. Tú misma me lo dijiste: “si no quieres, te obligo”. Pues ahora te lo digo yo: yo tampoco puedo dejarte.",
-      "No te prometo que todo vaya a ser fácil. Te prometo que voy a seguir aquí, trabajando, sin darme por vencido y eligiéndote a ti.",
+      "Ese botón de “No” nunca iba a funcionar, igual que tu “yo no soy celosa amor”. Ya está, quedó por escrito: eres mi celosa.",
+      "Y la verdad, me encanta. Tú misma me dijiste un día: “A mí sí me gusta que seas celoso”. Pues a mí también me gusta que tú lo seas, porque así sé que te importo.",
+      "Ahora en serio: no te prometo que todo vaya a ser fácil. Te prometo que voy a seguir aquí, trabajando, sin darme por vencido y eligiéndote a ti.",
       "Gracias por quedarte, por regañarme cuando no como y por llenar mis días de 😘 y 🥰."
     ],
-    grande: "Te amo de verdad, mi vida.<br>Hoy y todos los días que vengan.",
+    grande: "Te amo de verdad, celosa mía.<br>Hoy y todos los días que vengan.",
     firma: "Tuyo 🤍<br>— Alejo"
   }
 };
