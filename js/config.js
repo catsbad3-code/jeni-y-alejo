@@ -16,6 +16,14 @@ const REGALO = {
     "Te quiero más de lo que tu mente puede llegar a pensar."
   ],
   firma: "Te amo de verdad",
+  viaje: {                            // cuenta atrás hasta que llegue
+    llegada: "2026-11-24T00:00:00",   // salida del vuelo (AAAA-MM-DDTHH:MM:SS); pon la hora si la sabes
+    regreso: "2027-01-09",
+    titulo: "Ya casi te tengo aquí",
+    texto: "Tu vuelo sale el 24 de noviembre y te quedas hasta el 9 de enero.",
+    llego: "¡Ya estás aquí, mi vida! 🤍"
+  },
+  whatsapp: "",                       // tu número con código de país, sin + ni espacios (ej: 13055551234)
   numeros: [                          // sacados de nuestro chat
     { n: "93.352", t: "mensajes" },
     { n: "733", t: "veces te dije “mi vida”" },
@@ -30,6 +38,7 @@ const REGALO = {
     { fecha: "9 de agosto de 2026", titulo: "Tu respuesta", texto: "“Yo sé que te amo porque no paro de pensar en ti.”" },
     { fecha: "5 de octubre de 2026", titulo: "Tu promesa", texto: "“Nosotros vamos a seguir juntos. Si no quieres, te obligo.” Nunca me habían amenazado tan bonito." },
     { fecha: "16 de octubre de 2026", titulo: "En persona", texto: "“Yo me siento muy bien contigo. En persona, demasiado.”" },
+    { fecha: "28 de octubre de 2026", titulo: "El boleto", texto: "“Salida el 24, retorno el 9.” Ya casi te voy a tener aquí." },
     { fecha: "4 de noviembre de 2026", titulo: "Hoy", texto: "Tú: “Yo lo que sé es que quiero estar contigo”. Yo: “No te voy a dejar”." }
   ],
   preguntas: [

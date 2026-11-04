@@ -140,6 +140,33 @@ function tick(){
 }
 tick(); setInterval(tick, 1000);
 
+/* Cuenta atrás del viaje */
+const V = REGALO.viaje;
+if (!V) $("viaje").hidden = true;
+else {
+  const llegada = new Date(V.llegada), regreso = new Date(V.regreso + "T00:00:00");
+  const dias = Math.round((regreso - llegada) / 86400000);
+  $("viajeTitulo").textContent = V.titulo;
+  $("viajeTexto").textContent = V.texto;
+  $("viajeEstancia").textContent = dias + " días juntos 🤍";
+  const vtick = () => {
+    const s = Math.floor((llegada - Date.now()) / 1000);
+    if (s <= 0) { $("viajeLive").hidden = true; $("viajeLlego").hidden = false; $("viajeLlego").textContent = V.llego; return false; }
+    $("vd").textContent = Math.floor(s / 86400);
+    $("vh").textContent = pad(Math.floor(s / 3600) % 24);
+    $("vm").textContent = pad(Math.floor(s / 60) % 60);
+    $("vs").textContent = pad(s % 60);
+    return true;
+  };
+  if (vtick()) { const iv = setInterval(() => { if (!vtick()) clearInterval(iv); }, 1000); }
+}
+
+/* Botón de WhatsApp */
+if (REGALO.whatsapp) {
+  $("waBtn").href = "https://wa.me/" + String(REGALO.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent("Ya vi mi regalo 🥰 … y sí, soy celosa 😆 Te amo 💖");
+  $("waBtn").hidden = false;
+}
+
 /* Raspa y descubre */
 function initScratch(){
   const c = $("scratch"), wrap = $("scratchWrap"), r = wrap.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
