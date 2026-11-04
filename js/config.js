@@ -3,7 +3,7 @@ const REGALO = {
   para: "Yerisel",
   de: "Alejo",
   inicio: "2026-07-18",              // primer mensaje desde el número nuevo (AAAA-MM-DD)
-  cancion: { titulo: "Lo Sabes Bien", artista: "Al2 El Aldeano" },
+  cancion: { titulo: "Nuestra canción", artista: "Para ti, mi vida 🤍" },   // cambia aquí el título y el artista
   fotos: [                            // pon la URL de cada foto en "src"
     { src: "img/nosotros.jpg", texto: "Tú y yo, contra todo" }
   ],
