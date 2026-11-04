@@ -23,7 +23,7 @@ const REGALO = {
     texto: "Tu vuelo sale el 24 de noviembre y te quedas hasta el 9 de enero.",
     llego: "¡Ya estás aquí, mi vida! 🤍"
   },
-  whatsapp: "",                       // tu número con código de país, sin + ni espacios (ej: 13055551234)
+  whatsapp: "5977400049",                       // tu número con código de país, sin + ni espacios (ej: 13055551234)
   numeros: [                          // sacados de nuestro chat
     { n: "93.352", t: "mensajes" },
     { n: "733", t: "veces te dije “mi vida”" },
