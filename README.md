@@ -1,6 +1,6 @@
-# Nuestro Aniversario ♥
+# Para Yerisel ♥
 
-Página de regalo de aniversario (Jenifer y Alejo). Sitio estático: HTML, CSS y JavaScript sin dependencias ni build.
+Página de regalo (Yerisel y Alejo). Sitio estático: HTML, CSS y JavaScript sin dependencias ni build.
 
 ## Estructura
 

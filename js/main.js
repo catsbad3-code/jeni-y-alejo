@@ -23,8 +23,14 @@ $("lbClose").addEventListener("click", () => $("lightbox").hidden = true);
 $("lbPrev").addEventListener("click", () => openLb(lbI - 1));
 $("lbNext").addEventListener("click", () => openLb(lbI + 1));
 $("lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") $("lightbox").hidden = true; });
+document.addEventListener("keydown", e => { if ($("lightbox").hidden) return; if (e.key === "Escape") $("lightbox").hidden = true; else if (e.key === "ArrowLeft") openLb(lbI - 1); else if (e.key === "ArrowRight") openLb(lbI + 1); });
+if (REGALO.fotos.length === 1) { $("gallery").classList.add("single"); $("swipe").textContent = "Toca la foto para verla en grande"; }
+if (fotosCon.length < 2) { $("lbPrev").hidden = true; $("lbNext").hidden = true; }
 
 $("letter").innerHTML = REGALO.carta.map(p => `<p>${esc(p)}</p>`).join("") + `<p class="sign">${esc(REGALO.firma)}, ${esc(REGALO.de)}</p>`;
+
+$("stats").innerHTML = (REGALO.numeros || []).map(x => `<div class="stat"><b>${esc(x.n)}</b><span>${esc(x.t)}</span></div>`).join("");
+if (!(REGALO.numeros || []).length) $("stats").hidden = true;
 
 $("timeline").innerHTML = REGALO.momentos.map(m => `
   <li><time>${esc(m.fecha)}</time><h3>${esc(m.titulo)}</h3><p>${esc(m.texto)}</p></li>`).join("");
@@ -33,13 +39,13 @@ const start = new Date(REGALO.inicio + "T00:00:00");
 const totalDays = Math.max(0, Math.floor((Date.now() - start) / 86400000));
 $("since").textContent = "desde el " + start.toLocaleDateString("es", { day: "numeric", month: "long", year: "numeric" });
 $("days").textContent = totalDays.toLocaleString("es");
-$("foot").textContent = REGALO.para + " y " + REGALO.de + " ♥";
+$("foot").textContent = REGALO.para + " ♾️ " + REGALO.de;
 
 /* Abrir regalo */
 const app = $("app");
 app.classList.add("locked");
 const TOQUES = 7;   // cuántos toques hacen falta para abrir el regalo
-const frases = ["Sigue…", "Esto no es un perfil falso 😆", "Se está llenando de amor", "Ya casi, mi amor", "¡Falta muy poco!", "Uno más…"];
+const frases = ["Sigue…", "Primera persona que lo tiene 😏", "Ya empiezo a sentir más que querer…", "Se está llenando de amor", "Ya casi, mi vida", "Uno más…"];
 let toques = 0;
 $("taps").innerHTML = "<i></i>".repeat(TOQUES);
 const fill = document.querySelector(".heart-btn .fill");
@@ -65,8 +71,9 @@ function countUp(){
 }
 
 /* Cuestionario */
-let qi = 0;
+let qi = 0, qBusy = false;
 function renderQ(){
+  qBusy = false;
   const p = REGALO.preguntas[qi];
   $("quiz").innerHTML = `<div class="progress">Pregunta ${qi + 1} de ${REGALO.preguntas.length}</div>
     <p class="q">${esc(p.q)}</p>
@@ -74,11 +81,12 @@ function renderQ(){
     <p class="msg" id="msg"></p>`;
 }
 $("quiz").addEventListener("click", e => {
-  const b = e.target.closest(".opt"); if (!b) return;
+  const b = e.target.closest(".opt"); if (!b || qBusy) return;
   const p = REGALO.preguntas[qi];
   if (+b.dataset.i === p.correcta) {
-    b.classList.add("ok"); $("msg").textContent = "¡Sí! ♥";
-    setTimeout(() => { qi++; if (qi < REGALO.preguntas.length) renderQ(); else finish(); }, 800);
+    qBusy = true;
+    b.classList.add("ok"); $("msg").textContent = p.extra || "¡Sí! ♥";
+    setTimeout(() => { qi++; if (qi < REGALO.preguntas.length) renderQ(); else finish(); }, p.extra ? 1600 : 800);
   } else {
     b.classList.remove("no"); void b.offsetWidth; b.classList.add("no"); vib([60, 40, 60]);
     $("msg").textContent = "Mmm… inténtalo otra vez";
@@ -168,9 +176,15 @@ function initScratch(){
 
 /* Pregunta final */
 $("oneMore").addEventListener("click", () => { $("oneMore").hidden = true; $("final").hidden = false; $("final").scrollIntoView({ behavior: "smooth", block: "center" }); });
-const noTxt = ["¿Segura? 😏", "Ese no funciona", "Jajaja no", "Prueba el otro 😆", "No hay escapatoria", "Ya ríndete"];
+const F = REGALO.final;
+$("finalQ").textContent = F.pregunta;
+$("yesTitle").textContent = F.titulo;
+$("yesBody").innerHTML = F.parrafos.map(p => `<p>${esc(p)}</p>`).join("");
+$("yesBig").innerHTML = F.grande.split("<br>").map(esc).join("<br>");
+$("yesSign").innerHTML = F.firma.split("<br>").map(esc).join("<br>");
+const noTxt = F.noTextos;
 let noI = 0;
-function escape(e){
+function huir(e){
   if (e) e.preventDefault();
   const yn = $("yn"), no = $("no"), W = yn.clientWidth - no.offsetWidth, H = yn.clientHeight - no.offsetHeight;
   no.style.left = Math.max(0, Math.random() * W) + "px";
@@ -178,7 +192,7 @@ function escape(e){
   no.textContent = noTxt[noI++ % noTxt.length];
   vib(40);
 }
-["pointerenter", "pointerdown", "click"].forEach(ev => $("no").addEventListener(ev, escape));
+["pointerenter", "pointerdown", "click"].forEach(ev => $("no").addEventListener(ev, huir));
 $("yes").addEventListener("click", () => {
   $("yn").hidden = true;
   $("yesCard").hidden = false;

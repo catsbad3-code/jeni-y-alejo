@@ -1,60 +1,88 @@
 /* ===================== EDITA AQUÍ TUS DATOS ===================== */
 const REGALO = {
-  para: "Jenifer",
+  para: "Yerisel",
   de: "Alejo",
-  inicio: "2025-10-16",              // fecha en que empezaron (AAAA-MM-DD)
+  inicio: "2026-07-18",              // primer mensaje desde el número nuevo (AAAA-MM-DD)
   cancion: { titulo: "Lo Sabes Bien", artista: "Al2 El Aldeano" },
-  fotos: [                            // pon la URL de cada foto en "src" (o déjalo vacío)
-    { src: "img/foto-4.jpg", texto: "Mi persona favorita" },
-    { src: "img/foto-3.jpg", texto: "Tú y yo" },
-    { src: "img/foto-5.jpg", texto: "De tu mano, siempre" },
-    { src: "img/foto-1.jpg", texto: "Mi lugar favorito: tus brazos" },
-    { src: "img/foto-2.jpg", texto: "Siempre tan bonita" }
+  fotos: [                            // pon la URL de cada foto en "src"
+    { src: "img/nosotros.jpg", texto: "Tú y yo, contra todo" }
   ],
   carta: [
-    "Mi amor:",
-    "Hace un año me preguntaste de dónde había sacado tu número y me pediste mil veces que te mandara un audio. Pensabas que yo era un perfil falso. Mírame ahora: aquí sigo, bien real y bien tuyo.",
-    "El 16 de octubre me dijiste que fuéramos a hablar “normal, como amistad”. Esa noche supe que contigo nunca iba a ser solo amistad.",
-    "No siempre ha sido fácil, pero aquí estamos, un año después, eligiéndonos todavía.",
-    "Un día me escribiste que todos los días de tu vida me ibas a elegir a mí. Hoy te digo lo mismo: te elijo hoy, mañana y todos los días que vengan.",
-    "Gracias por cuidarme, por estar pendiente de mí y por quererme como me quieres."
+    "Mi princesa:",
+    "El 18 de julio te escribí desde mi número nuevo y te dije que eras la primera persona que lo tenía. No sabía que también ibas a ser la primera en tantas otras cosas.",
+    "A los tres días te dije que parecía que nos conocíamos de años. Lo sigo pensando: si te pusiste de frente a mi vida en este momento, es por algo.",
+    "No ha sido fácil. Nos conocimos en momentos difíciles para los dos, con distancia, con miedos y con días en que no supimos hacerlo bien. Pero un día me dijiste: “nosotros vamos a seguir juntos”. Y aquí seguimos.",
+    "Me encanta que me digas papi, que me llenes el chat de 😘 y 🥰, que me regañes cuando no como y que me digas que te hace feliz ver que no me doy por vencido. Contigo tampoco me voy a rendir.",
+    "Te quiero más de lo que tu mente puede llegar a pensar."
   ],
-  firma: "Te amo, hoy y siempre",
+  firma: "Te amo de verdad",
+  numeros: [                          // sacados de nuestro chat
+    { n: "93.352", t: "mensajes" },
+    { n: "733", t: "veces te dije “mi vida”" },
+    { n: "481", t: "“te amo”" },
+    { n: "2.057", t: "mensajes el 21 de julio" }
+  ],
   momentos: [
-    { fecha: "14 de octubre de 2025", titulo: "Nuestra primera conversación", texto: "“¿De dónde sacaste mi número?” y “manda audio”. Así empezó todo." },
-    { fecha: "16 de octubre de 2025", titulo: "La primera vez que nos vimos", texto: "“Hablamos normal, como amistad”… y mira dónde estamos." },
-    { fecha: "20 de octubre de 2025", titulo: "El primer “te quiero”", texto: "Te lo dije yo, y tú me respondiste “yo tmb te quiero ❤️”." },
-    { fecha: "23 de octubre de 2025", titulo: "El primer “te amo”", texto: "Esta vez fuiste tú. Y yo no tardé ni un segundo en decirte que yo también." },
-    { fecha: "3 de abril de 2026", titulo: "Tu mensaje", texto: "“Todos los días de mi vida te elegiré a ti.” Lo guardo como lo más bonito que me han escrito." },
-    { fecha: "16 de octubre de 2026", titulo: "Nuestro primer año", texto: "365 días después, y lo que nos queda por vivir." }
+    { fecha: "18 de julio de 2026", titulo: "El número nuevo", texto: "“Primera persona que lo tiene.” Esa noche te dije que me estabas encantando demasiado, y tú: “Tú a mí también”." },
+    { fecha: "21 de julio de 2026", titulo: "Como si nos conociéramos de años", texto: "A las 12:21 de la madrugada te lo dije, y tú: “Sí, verdad jjj”." },
+    { fecha: "25 de julio de 2026", titulo: "Mi mensaje de buenos días", texto: "Te dije que no me asustan las cosas difíciles y que luchar por lo que cuesta es lo que hace que valga la pena." },
+    { fecha: "7 de agosto de 2026", titulo: "El primer “te amo”", texto: "“Ya empiezo a sentir más que querer”… y a la 1:38 de la madrugada: “Te amo mi vida”. Tú: “Y yo papi”." },
+    { fecha: "9 de agosto de 2026", titulo: "Tu respuesta", texto: "“Yo sé que te amo porque no paro de pensar en ti.”" },
+    { fecha: "5 de octubre de 2026", titulo: "Tu promesa", texto: "“Nosotros vamos a seguir juntos. Si no quieres, te obligo.” Nunca me habían amenazado tan bonito." },
+    { fecha: "16 de octubre de 2026", titulo: "En persona", texto: "“Yo me siento muy bien contigo. En persona, demasiado.”" },
+    { fecha: "4 de noviembre de 2026", titulo: "Hoy", texto: "Tú: “Yo lo que sé es que quiero estar contigo”. Yo: “No te voy a dejar”." }
   ],
   preguntas: [
-    { q: "Cuando empezamos a hablar, ¿qué pensabas que era yo?", opciones: ["Un perfil falso", "Un cantante", "Un amigo de tu prima"], correcta: 0 },
-    { q: "La primera noche que hablamos, ¿qué me pediste una y otra vez?", opciones: ["Que te mandara una foto", "Que te dijera mi nombre", "Que te mandara un audio"], correcta: 2 },
-    { q: "Yo dije “te quiero” primero… pero ¿quién dijo “te amo” primero?", opciones: ["Tú", "Yo", "Los dos a la vez"], correcta: 0 }
+    { q: "Cuando te escribí desde el número nuevo, ¿qué te dije?", opciones: ["Que se me había roto el teléfono", "Que eras la primera persona que lo tenía", "Que me lo habían regalado"], correcta: 1, extra: "¡Sí! La primera de todas ♥" },
+    { q: "La primera vez que te dije “Te amo mi vida”, ¿qué me respondiste?", opciones: ["Yo también te amo", "Jjj 🙈", "Y yo papi"], correcta: 2, extra: "“Y yo papi” 🥰" },
+    { q: "En nuestro chat, ¿cómo me dices más veces?", opciones: ["Papi", "Amor", "Ale"], correcta: 1, extra: "¡Amor! Más de 1.200 veces (y papi, 922 😏)" }
   ],
   chat: [
-    { dia: "14 de octubre de 2025" },
-    { de: "ella", t: "De dónde sacaste mi número", h: "1:36 a. m." },
-    { de: "ella", t: "Y manda audio", h: "1:36 a. m." },
-    { de: "yo", t: "Si te escribí es porque llamaste la atención", h: "1:39 a. m." },
-    { dia: "16 de octubre de 2025" },
-    { de: "ella", t: "Ok voy un rato a tu casa", h: "7:55 p. m." },
-    { dia: "20 de octubre de 2025" },
-    { de: "yo", t: "Te quiero ❤️", h: "9:18 p. m." },
-    { de: "ella", t: "Yo tmb te quiero ❤️", h: "9:20 p. m." },
-    { dia: "23 de octubre de 2025" },
-    { de: "ella", t: "Te amo", h: "6:49 p. m." },
-    { de: "yo", t: "Yo también te amo", h: "6:49 p. m." },
-    { dia: "6 de enero de 2026" },
-    { de: "ella", t: "Tienes q ir a algún lado", h: "5:31 p. m." },
-    { de: "yo", t: "No xq te extraño", h: "5:32 p. m." },
-    { de: "ella", t: "Awww 😍", h: "5:36 p. m." },
-    { dia: "3 de abril de 2026" },
-    { de: "ella", grande: true, t: "Todos los días de mi vida te elegiré a ti y te seguiré eligiendo xq te amo tanto q no te lo podría explicar ni con palabras", h: "1:19 a. m." },
-    { dia: "19 de abril de 2026" },
-    { de: "ella", t: "Yo te amo más mi amor", h: "10:30 a. m." }
+    { dia: "18 de julio de 2026" },
+    { de: "yo", t: "Mira mi vida", h: "7:59 p. m." },
+    { de: "yo", t: "Este es el número nuevo", h: "7:59 p. m." },
+    { de: "yo", t: "Primera persona q lo tiene", h: "8:00 p. m." },
+    { de: "ella", t: "Jjjj", h: "8:00 p. m." },
+    { de: "yo", t: "Ay mi corazón", h: "8:01 p. m." },
+    { de: "yo", t: "Me estás encantando demasiado", h: "8:01 p. m." },
+    { de: "ella", t: "Tu a mi también", h: "8:01 p. m." },
+    { dia: "21 de julio de 2026" },
+    { de: "yo", t: "Parece q nos conocemos de años", h: "12:21 a. m." },
+    { de: "ella", t: "Si verdad jjj", h: "12:21 a. m." },
+    { de: "yo", t: "Si te pusiste de frente a mi vida en estos momentos es por algo", h: "12:22 a. m." },
+    { dia: "30 de julio de 2026" },
+    { de: "yo", t: "Te quiero más de lo q tú mente puede llegar a pensar ❤️", h: "8:05 p. m." },
+    { de: "ella", t: "Que bello amor 💘", h: "8:11 p. m." },
+    { dia: "7 de agosto de 2026" },
+    { de: "yo", t: "Ya empiezo a sentir más q querer", h: "1:27 a. m." },
+    { de: "ella", t: "Que sientes", h: "1:30 a. m." },
+    { de: "yo", t: "Te amo mi vida", h: "1:38 a. m." },
+    { de: "ella", t: "Y yo papi", h: "1:39 a. m." },
+    { dia: "9 de agosto de 2026" },
+    { de: "ella", grande: true, t: "Yo se que te amo por que no paro de pensar en ti", h: "12:37 a. m." },
+    { dia: "5 de octubre de 2026" },
+    { de: "ella", grande: true, t: "A mi no me da la gana de que te alejes no me importa lo que digas nosotros vamos a seguir juntos si no quieres te obligo yo no puedo dejarte 🤷", h: "7:25 p. m." },
+    { de: "ella", t: "Te amo 💖", h: "7:27 p. m." },
+    { de: "yo", t: "Yo también te amo", h: "7:27 p. m." },
+    { dia: "26 de octubre de 2026" },
+    { de: "ella", t: "La verdad me hace feliz ver que eres un hombre que no se da por vencido y le gusta trabajar y salir adelante, unas de las cosas que me atraen de ti", h: "11:58 p. m." },
+    { dia: "4 de noviembre de 2026" },
+    { de: "ella", t: "Yo lo que se es que quiero estar contigo", h: "7:44 p. m." },
+    { de: "yo", t: "No te voy a dejar", h: "7:52 p. m." },
+    { de: "ella", t: "💚", h: "7:52 p. m." }
   ],
-  vale: "Vale por una salida juntos, a donde tú quieras"
+  vale: "Vale por ir a buscarte al aeropuerto… y un abrazo que no se acabe nunca",
+  final: {
+    pregunta: "¿Vamos a seguir juntos?",
+    noTextos: ["¿Segura? 😏", "Ese no funciona", "Te obligo 🤷", "Jajaja no", "No hay escapatoria", "Ya ríndete"],
+    titulo: "¡Sabía que dirías que sí! 🥰",
+    parrafos: [
+      "Ese botón de “No” nunca iba a funcionar. Tú misma me lo dijiste: “si no quieres, te obligo”. Pues ahora te lo digo yo: yo tampoco puedo dejarte.",
+      "No te prometo que todo vaya a ser fácil. Te prometo que voy a seguir aquí, trabajando, sin darme por vencido y eligiéndote a ti.",
+      "Gracias por quedarte, por regañarme cuando no como y por llenar mis días de 😘 y 🥰."
+    ],
+    grande: "Te amo de verdad, mi vida.<br>Hoy y todos los días que vengan.",
+    firma: "Tuyo 🤍<br>— Alejo"
+  }
 };
 /* ================================================================ */
